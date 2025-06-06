@@ -1,0 +1,44 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack <Character> stack = new Stack<>();
+        for(char ch: s.toCharArray()){
+            if(ch=='(' || ch=='{' || ch=='[' ){
+                stack.push(ch);
+            }
+            else if(ch == ')'){
+                boolean value = func(stack,'(');
+                if(value==false){
+                    return false;
+                }
+            }
+            else if(ch=='}'){
+                boolean value = func(stack,'{');
+                if(value==false){
+                    return false;
+                }
+            }
+            else{
+                boolean value = func(stack,'[');
+                if(value == false){
+                    return false;
+                }
+            }
+        }
+        if(stack.size()>0){
+        return false;
+    }
+    return true;
+    }
+    public boolean func(Stack<Character> s,char a){
+        if(s.size()==0){
+            return false;
+        }
+        if(s.peek()!=a){
+            return false;
+        }
+        else{
+            s.pop();
+        }
+        return true;
+    }
+}
